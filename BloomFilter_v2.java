@@ -3,7 +3,7 @@
 
 // BloomFilter_v2.java
 // ===================
-// Version 2: Using bitmasks along with BigInteger we can save a lot of memory compared 
+// Version 2: Using bitmasks along with BigInteger, we can save a lot of memory compared 
 // to using boolean arrays.
 
 import java.util.*;
@@ -33,7 +33,7 @@ public class BloomFilter_v2
 		this.size++;
 	}
 
-	// Bloom Filters do not supposrt deletion.
+	// Bloom Filters do not support deletion.
 	public boolean remove(String str)
 	{
 		return false;

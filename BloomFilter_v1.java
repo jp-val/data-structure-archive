@@ -51,7 +51,7 @@ public class BloomFilter_v1
 		this.size++;
 	}
 
-	// Bloom Filters do not supposrt deletion.
+	// Bloom Filters do not support deletion.
 	public boolean remove(String str)
 	{
 		return false;
