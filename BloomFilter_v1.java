@@ -4,7 +4,7 @@
 // BloomFilter_v1.java
 // ================
 // Version 1: Fast implimentation, but heavy on memory. Instead of having different 
-// hash functions, we can use mutiple tables of different lengths.
+// hash functions, I used mutiple tables of different lengths.
 
 import java.util.*;
 import java.math.*;
