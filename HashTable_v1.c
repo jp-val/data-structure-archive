@@ -1,7 +1,7 @@
 // JP Valdespino
 // August 2021
 
-// Hashtable_v1.c
+// HashTable_v1.c
 // ==============
 // Collision resolution: Quadradic Probing
 // Average runtime: O(1)
