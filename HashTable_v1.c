@@ -3,7 +3,7 @@
 
 // Hashtable_v1.c
 // ==============
-// Conflict resolution: Quadradic probing.
+// Collision resolution: Quadradic Probing
 // Average runtime: O(1)
 // Worst case runtime: O(n), where n is the table size.
 
@@ -15,18 +15,18 @@
 #define HASH_CONSTANT 37
 #define DIRTY_BIT "<__D_B__>"
 
-typedef struct Hashtable
+typedef struct HashTable
 {
 	char **table;
 	
-	int size;
+	int size; // Number of elements in the Hash Table.
 	int dirtyBitCnt;
 
-} Hashtable;
+} HashTable;
 
-Hashtable *createHashtable()
+HashTable *createHashTable()
 {
-	Hashtable *t = (Hashtable*)malloc(sizeof(Hashtable));
+	HashTable *t = (HashTable*)malloc(sizeof(HashTable));
 	
 	t->table = (char**)calloc(TABLE_SIZE, sizeof(char*));
 	
@@ -46,7 +46,7 @@ int hash(char *str)
 	return hval;
 }
 
-void rehash(Hashtable *t)
+void rehash(HashTable *t)
 {
 	int i, j, hval, index;
 	char **tmp, **new_table = (char**)calloc(TABLE_SIZE, sizeof(char*));
@@ -76,7 +76,7 @@ void rehash(Hashtable *t)
 	t->dirtyBitCnt = 0;
 }
 
-int add(Hashtable *t, char *str)
+int add(HashTable *t, char *str)
 {
 	int i = 0, hval, index;
 
@@ -108,7 +108,7 @@ int add(Hashtable *t, char *str)
 	return 1;
 }
 
-int delete(Hashtable *t, char *str)
+int delete(HashTable *t, char *str)
 {
 	int i = 0, hval, index;
 
@@ -143,7 +143,7 @@ int delete(Hashtable *t, char *str)
 	return 0;
 }
 
-int contains(Hashtable *t, char *str)
+int contains(HashTable *t, char *str)
 {
 	int i = 0, hval, index;
 
@@ -171,7 +171,7 @@ int contains(Hashtable *t, char *str)
 	return 0;
 }
 
-void display(Hashtable *t)
+void display(HashTable *t)
 {
 	int i;
 
@@ -183,7 +183,7 @@ void display(Hashtable *t)
 
 int main(int argc, char **argv)
 {
-	Hashtable *t = createHashtable();
+	HashTable *t = createHashTable();
 
 	char *str = (char*)malloc(10 * sizeof(char));
 	strcpy(str, "powerful");
