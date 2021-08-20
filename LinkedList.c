@@ -302,7 +302,7 @@ int isEmpty(LinkedList *list)
 	}
 }
 
-LinkedList *cloneLinkedList(LinkedList *list) // TODO
+LinkedList *cloneLinkedList(LinkedList *list)
 {
 	Node *tmp;
 	LinkedList *clone = createLinkedList();
@@ -421,5 +421,7 @@ int main(int argc, char **argv)
 
 	display(s);
 	
+	s = destroyLinkedList(s);
+
 	return 0;
 }
