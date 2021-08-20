@@ -11,7 +11,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define TABLE_SIZE 13 // Should be a prime number like 33, 37, or 997.
+#define TABLE_SIZE 23 // Should be a prime number like 33, 37, or 997.
 #define HASH_CONSTANT 37
 #define DIRTY_BIT "<__D_B__>"
 
@@ -24,7 +24,7 @@ typedef struct HashTable
 
 } HashTable;
 
-HashTable *createHashTable()
+HashTable *createHashTable(void)
 {
 	HashTable *t = (HashTable*)malloc(sizeof(HashTable));
 	
@@ -38,15 +38,20 @@ HashTable *createHashTable()
 
 int hash(char *str)
 {
-	int i, hval = 0, len = strlen(str);
-	
+	int i, hval, len;
+
+	if (str == NULL) return -1;
+
+	hval = 0;
+	len = strlen(str);
+
 	for (i = 0; i < len; i++)
 		hval = (hval * HASH_CONSTANT + (int)str[i]) % TABLE_SIZE;
 
 	return hval;
 }
 
-void rehash(HashTable *t)
+void rehashHashTable(HashTable *t)
 {
 	int i, j, hval, index;
 	char **tmp, **new_table = (char**)calloc(TABLE_SIZE, sizeof(char*));
@@ -80,11 +85,12 @@ int add(HashTable *t, char *str)
 {
 	int i = 0, hval, index;
 
-	if (t == NULL || t->table == NULL || str == NULL)
-		return 0;
+	if (t == NULL || t->table == NULL || str == NULL) return 0;
 
 	if (t->dirtyBitCnt > t->size && t->dirtyBitCnt + t->size > TABLE_SIZE / 2)
-		rehash(t);
+	{
+		rehashHashTable(t);
+	}
 
 	hval = hash(str);
 
@@ -112,8 +118,7 @@ int delete(HashTable *t, char *str)
 {
 	int i = 0, hval, index;
 
-	if (t == NULL || t->table == NULL || str == NULL)
-		return 0;
+	if (t == NULL || t->table == NULL || str == NULL) return 0;
 
 	hval = hash(str);
 
@@ -147,8 +152,7 @@ int contains(HashTable *t, char *str)
 {
 	int i = 0, hval, index;
 
-	if (t == NULL || t->table == NULL || str == NULL)
-		return 0;
+	if (t == NULL || t->table == NULL || str == NULL) return 0;
 
 	hval = hash(str);
 
@@ -217,7 +221,7 @@ int main(int argc, char **argv)
 
 	display(t);
 
-	rehash(t);
+	rehashHashTable(t);
 
 	display(t);
 
