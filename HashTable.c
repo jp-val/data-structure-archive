@@ -1,11 +1,12 @@
 // JP Valdespino
 // August 2021
 
-// HashTable_v1.c
-// ==============
+// HashTable.c
+// ===========
 // Collision resolution: Quadradic Probing
 // Average runtime: O(1)
 // Worst case runtime: O(n), where n is the table size.
+// For a Linked Chaining implementation, take a look at HashMap;
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -175,6 +176,32 @@ int contains(HashTable *t, char *str)
 	return 0;
 }
 
+HashTable *destroyHashTable(HashTable *t)
+{
+	int i;
+
+	if (t == NULL) return NULL;
+	
+	if (t->table == NULL)
+	{
+		free(t);
+		return NULL;
+	}
+
+	for (i = 0; i < TABLE_SIZE; i++)
+	{
+		if (t->table[i] != NULL)
+		{
+			free(t->table[i]);
+		}
+	}
+
+	free(t->table);
+	free(t);
+
+	return NULL;
+}
+
 void display(HashTable *t)
 {
 	int i;
@@ -224,6 +251,8 @@ int main(int argc, char **argv)
 	rehashHashTable(t);
 
 	display(t);
+
+	t = destroyHashTable(t);
 
 	return 0;
 }
