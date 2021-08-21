@@ -10,9 +10,9 @@
 // |-----------------------------------------------------|
 // | Time Complexity: | Best Case | Worst Case | Average |
 // |------------------+-----------+------------+---------|
-// | Insertion:		  |   O(1)    |    O(n)    |  O(h)   |
-// | Deletion:		  |   O(1)    |    O(n)    |  O(h)   |
-// | Search:		  |   O(1)    |    O(n)    |  O(h)   |
+// | Insertion:       |   O(1)    |    O(n)    |  O(h)   |
+// | Deletion:        |   O(1)    |    O(n)    |  O(h)   |
+// | Search:          |   O(1)    |    O(n)    |  O(h)   |
 // +-----------------------------------------------------+
 // *Where h is the height of the Tree, theoretically O(log n).
 // *Where n is the number of elements in the Tree.

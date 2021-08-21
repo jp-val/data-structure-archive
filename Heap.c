@@ -10,9 +10,9 @@
 // |------------------------------------------------------|
 // | Time Complexity: | Best Case | Worst Case | Average  |
 // |------------------+-----------+------------+----------|
-// | Insertion:		  | O(log n)  |  O(log n)  | O(log n) |
-// | Deletion:		  | O(log n)  |  O(log n)  | O(log n) |
-// | Search:		  | O(log n)  |  O(log n)  | O(log n) |
+// | Insertion:	      | O(log n)  |  O(log n)  | O(log n) |
+// | Deletion:        | O(log n)  |  O(log n)  | O(log n) |
+// | Search:          | O(log n)  |  O(log n)  | O(log n) |
 // +------------------------------------------------------+
 // *Where n is the number of elements in the Heap.
 
