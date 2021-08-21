@@ -3,13 +3,23 @@
 
 // LinkedList.c
 // ============
-// Insertion: O(1)
-// Deletion: O(n), where n is the number of elements in the Linked List.
-// Search: O(n), where n is the number of elements in the Linked List.
+
+// +---------------------------+
+// | Linked List               |
+// |---------------------------|
+// | Time Complexity:          |
+// |---------------------------|
+// | Insertion:           O(1) |
+// | Deletion:            O(n) |
+// | Search:              O(n) |
+// +---------------------------+
+// *Where n is the number of elements in the Tree.
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <limits.h>
+
+#define ERROR INT_MIN
 
 typedef struct Node
 {
@@ -239,7 +249,7 @@ int pop(LinkedList *list)
 
 	if (list == NULL || list->head == NULL)
 	{
-		return INT_MIN;
+		return ERROR;
 	}
 	else
 	{
@@ -282,7 +292,7 @@ int peek(LinkedList *list)
 {
 	if (list == NULL || list->head == NULL)
 	{
-		return INT_MIN;
+		return ERROR;
 	}
 	else
 	{
@@ -292,14 +302,7 @@ int peek(LinkedList *list)
 
 int isEmpty(LinkedList *list)
 {
-	if (list == NULL || list->head == NULL)
-	{
-		return 1;
-	}
-	else
-	{
-		return 0;
-	}
+	return list == NULL || list->head == NULL;
 }
 
 LinkedList *cloneLinkedList(LinkedList *list)

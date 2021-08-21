@@ -6,15 +6,15 @@
 // Version 1: Fast implementation, but heavy on memory. Instead of having different 
 // hash functions, I used mutiple tables of different lengths.
 
-// |-----------------------------------------------------|
+// +-----------------------------------------------------+
 // | Bloom Filter                                        |
 // |-----------------------------------------------------|
 // | Time Complexity: | Best Case | Worst Case | Average |
-// |-----------------------------------------------------|
+// |------------------+-----------+------------+---------|
 // | Insertion:		  |   O(k)    |    O(k)    |  O(k)   |
 // | Deletion:		  |     *     |     *      |    *    |
 // | Search:		  |   O(k)    |    O(k)    |  O(k)   |
-// |-----------------------------------------------------|
+// +-----------------------------------------------------+
 // *Where k is the length of the string (due to the hash function).
 // *Bloom Filter's do not support deletion.
 

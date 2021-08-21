@@ -5,6 +5,18 @@
 // =========
 // Collision resolution: Linked chaining.
 
+// +-----------------------------------------------------+
+// | HashMap                                             |
+// |-----------------------------------------------------|
+// | Time Complexity: | Best Case | Worst Case | Average |
+// |------------------+-----------+------------+---------|
+// | Insertion:		  |   O(k)    |  O(k + n)  |  O(k)   |
+// | Deletion:		  |   O(k)    |  O(k + n)  |  O(k)   |
+// | Search:		  |   O(k)    |  O(k + n)  |  O(k)   |
+// +-----------------------------------------------------+
+// *Where k is the length of the string being inserted.
+// *Where n is the number of elements in the HashMap.
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

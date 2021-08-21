@@ -4,9 +4,19 @@
 // HashTable.c
 // ===========
 // Collision resolution: Quadradic Probing
-// Average runtime: O(1)
-// Worst case runtime: O(n), where n is the table size.
 // For a Linked Chaining implementation, take a look at HashMap;
+
+// +-----------------------------------------------------+
+// | HashTable                                           |
+// |-----------------------------------------------------|
+// | Time Complexity: | Best Case | Worst Case | Average |
+// |------------------+-----------+------------+---------|
+// | Insertion:		  |   O(k)    |  O(k + n)  |  O(k)   |
+// | Deletion:		  |   O(k)    |  O(k + n)  |  O(k)   |
+// | Search:		  |   O(k)    |  O(k + n)  |  O(k)   |
+// +-----------------------------------------------------+
+// *Where k is the length of the string being inserted.
+// *Where n is the table size.
 
 #include <stdio.h>
 #include <stdlib.h>
