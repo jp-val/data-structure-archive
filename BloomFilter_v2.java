@@ -5,9 +5,20 @@
 // ===================
 // Version 2: Using bitmasks along with BigInteger, we can save a lot of memory compared 
 // to using boolean arrays.
+// |-----------------------------------------------------|
+// | Bloom Filter                                        |
+// |-----------------------------------------------------|
+// | Time Complexity: | Best Case | Worst Case | Average |
+// |-----------------------------------------------------|
+// | Insertion:		  |   O(k)    |    O(k)    |  O(k)   |
+// | Deletion:		  |     *     |     *      |    *    |
+// | Search:		  |   O(k)    |    O(k)    |  O(k)   |
+// |-----------------------------------------------------|
+// *Where k is the length of the string (due to the hash function).
+// *Bloom Filter's do not support deletion.
 
-import java.util.*;
-import java.math.*;
+import java.util.Arrays;
+import java.math.BigInteger;
 
 public class BloomFilter_v2
 {

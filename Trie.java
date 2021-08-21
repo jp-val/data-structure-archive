@@ -3,10 +3,17 @@
 
 // Trie.java
 // =========
-// Time Complexity: O(k), where k is the length of the string.
-
-import java.io.*;
-import java.util.*;
+// This Trie does not support special characters, yet.
+// |-----------------------------------------------------|
+// | Trie                                                |
+// |-----------------------------------------------------|
+// | Time Complexity: | Best Case | Worst Case | Average |
+// |-----------------------------------------------------|
+// | Insertion:		  |   O(k)    |    O(k)    |  O(k)   |
+// | Deletion:		  |   O(k)    |    O(k)    |  O(k)   |
+// | Search:		  |   O(k)    |    O(k)    |  O(k)   |
+// |-----------------------------------------------------|
+// *Where k is the length of the string.
 
 class Node
 {
