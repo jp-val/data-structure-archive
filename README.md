@@ -1,6 +1,15 @@
 # data-structure-archive
 
-## Implemented in Java using OOP
+## Implemented in C
+(b/c these data structures are already implemented in Java and C++)
+
+	- Linked List
+	- Heap (with user set min or max heap initialization)
+	- Hash Table (with Quadradic Probing Collision Resolution)
+	- Hash Map (with Linked Chaining Collision Resolution)
+
+## Implemented in Java
+(using OOP)
 
 	- Binary Search Tree
 	- Trie
@@ -9,12 +18,6 @@
 	- Bloom Filter Version 1: Using Boolean Arrays
 	- Bloom Filter Version 2: Using BigInteger and Bitwise Operators
 
-	### TODO
+## Todo
+
 	- AVL Tree
-
-## Implemented in C (b/c these data structures are already implemented in Java)
-
-	- Linked List
-	- Heap (with user set min or max heap initialization)
-	- Hash Table (with Quadradic Probing Collision Resolution)
-	- Hash Map (with Linked Chaining Collision Resolution)
