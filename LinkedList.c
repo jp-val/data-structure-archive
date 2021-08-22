@@ -52,12 +52,24 @@ Node *createNode(int data)
 
 LinkedList *createLinkedList(void)
 {
-	LinkedList *new_LinkedList = calloc(1, sizeof(LinkedList));
+	Node *new_node;
+
+	LinkedList *new_LinkedList = malloc(sizeof(LinkedList));
 	if (new_LinkedList == NULL)
 	{
 		printf("Error: out of memory.\n");
 		return NULL;
 	}
+
+	new_node = createNode(ERROR);
+	if (new_node == NULL)
+	{
+		free(new_LinkedList);
+		return NULL;
+	}
+
+	new_LinkedList->head = new_LinkedList->tail = new_node;
+	new_LinkedList->size = 0;
 
 	return new_LinkedList;
 }
@@ -66,24 +78,22 @@ int add(LinkedList *list, int data)
 {
 	Node *new_node;
 
-	if (list == NULL)
+	if (list == NULL || list->head == NULL) return 0;
+
+	new_node = createNode(data);
+	if (new_node == NULL) return 0;
+
+	if (list->head == list->tail)
 	{
-		return 0;
-	}
-	else if (list->head == NULL)
-	{
-		list->head = list->tail = createNode(data);
+		list->head->next = list->tail = new_node;
 	}
 	else
 	{
-		new_node = createNode(data);
-		if (new_node == NULL) return 0;
-
-		list->tail->next = new_node;
-		list->tail = list->tail->next;
+		list->tail = list->tail->next = new_node;
 	}
 
 	list->size++;
+
 	return 1;
 }
 
@@ -91,24 +101,23 @@ int push(LinkedList *list, int data) // Head insert.
 {
 	Node *new_node;
 
-	if (list == NULL)
+	if (list == NULL || list->head == NULL) return 0;
+
+	new_node = createNode(data);
+	if (new_node == NULL) return 0;
+
+	if (list->head == list->tail)
 	{
-		return 0;
-	}
-	else if (list->head == NULL)
-	{
-		list->head = list->tail = createNode(data);
+		list->head->next = list->tail = new_node;
 	}
 	else
 	{
-		new_node = createNode(data);
-		if (new_node == NULL) return 0;
-
-		new_node->next = list->head;
-		list->head = new_node;
+		new_node->next = list->head->next;
+		list->head->next = new_node;
 	}
 
 	list->size++;
+
 	return 1;
 }
 
@@ -117,22 +126,19 @@ int insert(LinkedList *list, int data, int index)
 	int i;
 	Node *tmp, *new_node;
 
-	if (list == NULL)
-		return 0;
+	if (list == NULL || list->head == NULL) return 0;
 
-	if (index > list->size)
-		return 0;
+	if (index > list->size) return 0;
 
-	if (index == 0)
-		return push(list, data);
-
-	tmp = list->head;
-
-	for (i = 0; i < index-1; i++)
-		tmp = tmp->next;
+	if (index == list->size) return add(list, data);
 
 	new_node = createNode(data);
 	if (new_node == NULL) return 0;
+
+	tmp = list->head;
+
+	for (i = 0; i < index; i++)
+		tmp = tmp->next;
 
 	new_node->next = tmp->next;
 	tmp->next = new_node;
@@ -145,17 +151,6 @@ int delete(LinkedList *list, int data)
 	Node *tmp, *prev;
 
 	if (list == NULL || list->head == NULL) return 0;
-	
-	if (list->head->data == data)
-	{
-		tmp = list->head;
-		list->head = list->head->next;
-		
-		free(tmp);
-		list->size--;
-		
-		return 1;
-	}
 
 	prev = list->head;
 	tmp = list->head->next;
@@ -193,19 +188,6 @@ int deleteAll(LinkedList *list, int data)
 {
 	Node *tmp, *prev;
 	int retval = 0;
-
-	if (list == NULL || list->head == NULL) return retval;
-	
-	while (list->head != NULL && list->head->data == data)
-	{
-		tmp = list->head;
-		list->head = list->head->next;
-		
-		free(tmp);
-		list->size--;
-
-		retval = 1;
-	}
 
 	if (list == NULL || list->head == NULL) return retval;
 
@@ -247,31 +229,29 @@ int pop(LinkedList *list)
 	Node *tmp;
 	int retval;
 
-	if (list == NULL || list->head == NULL)
-	{
+	if (list == NULL || list->head == NULL || list->head->next == NULL)
 		return ERROR;
-	}
-	else
-	{
-		retval = list->head->data;
-		
-		tmp = list->head;
-		list->head = list->head->next;
-		
-		free(tmp);
-		list->size--;
+	
+	retval = list->head->next->data;
+	if (list->head->next == list->tail) list->tail = list->head;
 
-		return retval;
-	}
+	tmp = list->head->next;
+	list->head->next = list->head->next->next; // lolol
+	
+	free(tmp);
+	list->size--;
+
+	return retval;
+	
 }
 
 int contains(LinkedList *list, int data)
 {
 	Node *tmp;
 
-	if (list == NULL) return 0;
+	if (list == NULL || list->head == NULL) return 0;
 
-	tmp = list->head;
+	tmp = list->head->next;
 
 	while (tmp != NULL)
 	{
@@ -286,24 +266,34 @@ int contains(LinkedList *list, int data)
 
 int peek(LinkedList *list)
 {
-	if (list == NULL || list->head == NULL)
+	if (list == NULL || list->head == NULL || list->head->next == NULL)
 		return ERROR;
 	else
-		return list->head->data;
+		return list->head->next->data;
 }
 
 int isEmpty(LinkedList *list)
 {
-	return list == NULL || list->head == NULL;
+	return list == NULL || list->head == NULL || list->head->next == NULL;
 }
 
 LinkedList *cloneLinkedList(LinkedList *list)
 {
 	Node *tmp;
-	LinkedList *clone = createLinkedList();
+	LinkedList *clone;
+
+	if (list == NULL) return NULL;
+
+	clone = createLinkedList();
 	if (clone == NULL) return NULL;
 
-	tmp = list->head;
+	if (list->head == NULL)
+	{
+		free(clone->head);
+		return clone;
+	}
+
+	tmp = list->head->next;
 
 	while(tmp != NULL)
 		add(clone, tmp->data);
@@ -314,20 +304,22 @@ LinkedList *cloneLinkedList(LinkedList *list)
 void reverseLinkedList(LinkedList *list)
 {
 	int data;
-	LinkedList *new;
+	LinkedList *tmp;
 
 	if (list == NULL) return;
 
-	new = createLinkedList();
+	tmp = createLinkedList();
 
 	while(!isEmpty(list))
-		push(new, pop(list));
+		push(tmp, pop(list));
 
-	list->head = new->head;
-	list->tail = new->tail;
-	list->size = new->size;
+	free(list->head);
 
-	free(new);
+	list->head = tmp->head;
+	list->tail = tmp->tail;
+	list->size = tmp->size;
+
+	free(tmp);
 }
 
 LinkedList *destroyLinkedList(LinkedList *list)
@@ -352,13 +344,14 @@ void displayList(LinkedList *list)
 	int i;
 	Node *tmp;
 
-	if (list == NULL || list->head == NULL)
-		printf("<__EMPTY_LIST__>\n");
+	if (list == NULL || list->head == NULL || list->head->next == NULL)
+		printf("List: <__EMPTY_LIST__>\n");
 	
 	i = 1;
-	tmp = list->head;
+	tmp = list->head->next;
 
 	printf("size: %d\n", list->size);
+	printf("List: ");
 
 	while (tmp != NULL)
 	{
@@ -380,6 +373,18 @@ int main(int argc, char **argv)
 
 	pop(s);
 	pop(s);
+	pop(s);
+	pop(s);
+	pop(s);
+	pop(s);
+
+	displayList(s);
+	
+	push(s, 4);
+	push(s, 4);
+	push(s, 4);
+	push(s, 4);
+	push(s, 4);
 
 	displayList(s);
 
