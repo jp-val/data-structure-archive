@@ -276,13 +276,9 @@ int contains(LinkedList *list, int data)
 	while (tmp != NULL)
 	{
 		if (tmp->data == data)
-		{
 			return 1;
-		}
 		else
-		{
 			tmp = tmp->next;
-		}
 	}
 
 	return 0;
@@ -291,13 +287,9 @@ int contains(LinkedList *list, int data)
 int peek(LinkedList *list)
 {
 	if (list == NULL || list->head == NULL)
-	{
 		return ERROR;
-	}
 	else
-	{
 		return list->head->data;
-	}
 }
 
 int isEmpty(LinkedList *list)
@@ -314,9 +306,7 @@ LinkedList *cloneLinkedList(LinkedList *list)
 	tmp = list->head;
 
 	while(tmp != NULL)
-	{
 		add(clone, tmp->data);
-	}
 
 	return clone;
 }
@@ -331,9 +321,7 @@ void reverseLinkedList(LinkedList *list)
 	new = createLinkedList();
 
 	while(!isEmpty(list))
-	{
 		push(new, pop(list));
-	}
 
 	list->head = new->head;
 	list->tail = new->tail;
@@ -359,7 +347,7 @@ LinkedList *destroyLinkedList(LinkedList *list)
 	return NULL;
 }
 
-void display(LinkedList *list)
+void displayList(LinkedList *list)
 {
 	int i;
 	Node *tmp;
@@ -388,19 +376,19 @@ int main(int argc, char **argv)
 	add(s, 1);
 	add(s, 2);
 
-	display(s);
+	displayList(s);
 
 	pop(s);
 	pop(s);
 
-	display(s);
+	displayList(s);
 
 	add(s, 1);
 	add(s, 1);
 	add(s, 1);
 	add(s, 1);
 
-	display(s);
+	displayList(s);
 
 	pop(s);
 
@@ -408,11 +396,11 @@ int main(int argc, char **argv)
 	insert(s, 3, 0);
 	add(s, 2);
 
-	display(s);
+	displayList(s);
 
 	reverseLinkedList(s);
 
-	display(s);
+	displayList(s);
 
 	add(s, 9);
 	add(s, 9);
@@ -422,7 +410,7 @@ int main(int argc, char **argv)
 	push(s, 4);
 	push(s, 4);
 
-	display(s);
+	displayList(s);
 	
 	s = destroyLinkedList(s);
 

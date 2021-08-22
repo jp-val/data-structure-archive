@@ -3,7 +3,7 @@
 
 // Heap.c
 // ======
-// Implemenetd a switchable min and max Heap.
+// Implemented a Heap where the user can set whether it's a min or max Heap.
 
 // +------------------------------------------------------+
 // | Heap                                                 |
@@ -22,8 +22,8 @@
 
 #define TRUE 1
 #define FALSE 0
+#define CAPACITY 420
 #define ERROR INT_MIN
-#define CAPACITY 20
 
 typedef struct Heap
 {
@@ -41,8 +41,8 @@ Heap *createHeap(int isMinheap)
 	}
 
 	new_Heap->table = (int*)malloc(CAPACITY * sizeof(int));
-	new_Heap->isMinHeap = isMinheap;
 	new_Heap->size = 0;
+	new_Heap->isMinHeap = isMinheap;
 	new_Heap->capacity = CAPACITY;
 
 	return new_Heap;
@@ -60,11 +60,7 @@ int isEmpty(Heap *h)
 
 void swap(int *a, int *b)
 {
-	int tmp;
-
-	tmp = *a;
-	*a = *b;
-	*b = tmp;
+	int tmp = *a; *a = *b; *b = tmp;
 }
 
 void perculateUp(Heap *h, int child)
@@ -144,8 +140,8 @@ int poll(Heap *h)
 {
 	int retval;
 
-	if (h == NULL || h->table == NULL) return ERROR;
-	
+	if (isEmpty(h)) return ERROR;
+
 	retval = h->table[0];
 	h->table[0] = h->table[h->size-1];
 
@@ -166,13 +162,13 @@ Heap *destroyHeap(Heap *h)
 	return NULL;
 }
 
-void display(Heap *h)
+void displayHeap(Heap *h)
 {
 	int i;
 
 	if (h == NULL || h->table == NULL)
 	{
-		printf("Heap is NULL.\n");
+		printf("The Heap does not exist.\n");
 		return;
 	}
 
@@ -192,7 +188,7 @@ int main(int argc, char **argv)
 	{
 		add(minheap, i);
 		printf("%d: ", i);
-		display(minheap);
+		displayHeap(minheap);
 	}
 
 	printf("\n");
@@ -200,7 +196,7 @@ int main(int argc, char **argv)
 	while (!isEmpty(minheap))
 	{
 		printf("polled min: %d: ", poll(minheap));
-		display(minheap);
+		displayHeap(minheap);
 	}
 
 	minheap = destroyHeap(minheap);
