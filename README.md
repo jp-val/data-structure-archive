@@ -4,7 +4,7 @@
 (b/c these data structures are already implemented in Java and C++)
 
 	- Linked List
-	- Heap (with user set min or max heap initialization)
+	- Heap (with Min or Max Heap initialization)
 	- Hash Table (with Quadradic Probing Collision Resolution)
 	- Hash Map (with Linked Chaining Collision Resolution)
 
@@ -18,6 +18,6 @@
 	- Bloom Filter Version 1: Using Boolean Arrays
 	- Bloom Filter Version 2: Using BigInteger and Bitwise Operators
 
-## Todo
+	**TODO**
 
 	- AVL Tree
