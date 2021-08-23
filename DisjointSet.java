@@ -5,7 +5,7 @@
 // ================
 // Forest of trees implementation using an array.
 
-import java.util.*;
+import java.util.Arrays;
 
 public class DisjointSet
 {
@@ -41,7 +41,7 @@ public class DisjointSet
 
 	public void log()
 	{
-		System.out.println(Arrays.toString(this.parent));
+		System.out.println("Sets: " + Arrays.toString(this.parent));
 	}
 
 	public static void main(String[] args)
