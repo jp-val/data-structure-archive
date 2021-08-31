@@ -17,7 +17,8 @@
 	- Disjoint Set
 	- Bloom Filter Version 1: Using Boolean Arrays
 	- Bloom Filter Version 2: Using BigInteger and Bitwise Operators
+	- Graph (Not really a great feat, but I coded it up to use in a few algorithms.)
 
-	**TODO**
+**TODO**
 
 	- AVL Tree
