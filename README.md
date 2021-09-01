@@ -4,7 +4,7 @@
 (b/c these data structures are already implemented in Java and C++)
 
 	- Linked List
-	- Heap (with Min or Max Heap initialization)
+	- Heap (can be initialized to be either a Min or Max Heap)
 	- Hash Table (with Quadradic Probing Collision Resolution)
 	- Hash Map (with Linked Chaining Collision Resolution)
 
@@ -17,7 +17,7 @@
 	- Disjoint Set
 	- Bloom Filter Version 1: Using Boolean Arrays
 	- Bloom Filter Version 2: Using BigInteger and Bitwise Operators
-	- Graph (Not really a great feat, but I coded it up to use in a few algorithms.)
+	- Graph (not a great feat, but I coded it up to use in a few algorithms)
 
 **TODO**
 
