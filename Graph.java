@@ -11,9 +11,11 @@
 import java.io.File;
 import java.io.IOException;
 
+import java.util.Queue;
 import java.util.Arrays;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 // Edge object for graph representation utilizing Adjacency List.
 class Edge implements Comparable<Edge>
@@ -75,6 +77,29 @@ public class Graph
 		stdin.close();
 	}
 
+	public boolean containsCycle()
+	{
+		boolean[] visited = new boolean[this.adjList.size()];
+		Queue<Integer> q = new LinkedList<Integer>();
+
+		q.add(0);
+
+		while (!q.isEmpty())
+		{
+			Integer vertex = q.poll();
+			
+			if (visited[vertex])
+				return true;
+			else
+				visited[vertex] = true;
+
+			for (Edge e: this.adjList.get(vertex))
+				q.add(e.vertex);
+		}
+
+		return false;
+	}
+
 	public void displayAdjMatrix()
 	{
 		for (int i = 0; i < this.adjMatrix.length; i++)
@@ -103,10 +128,15 @@ public class Graph
 
 	public static void main(String[] args) throws IOException
 	{
-		Graph g = new Graph("graph-undirected-petersen.in");
+		Graph g1 = new Graph("graph-undirected-petersen.in");
+		Graph g2 = new Graph("graph-undirected-tree.in");
 		
-		g.displayAdjList();
+		g1.displayAdjList();
 		System.out.println();
-		g.displayAdjMatrix();
+		g1.displayAdjMatrix();
+		System.out.println();
+
+		System.out.println("contains cycle petersen graph: " + g1.containsCycle());
+		System.out.println("contains cycle tree graph: " + g2.containsCycle());
 	}
 }
