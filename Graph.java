@@ -77,13 +77,13 @@ public class Graph
 		stdin.close();
 	}
 
-	public boolean containsCycle()
+	public boolean containsCycle_forUndirectedGraphs()
 	{
 		boolean[] visited = new boolean[this.adjList.size()];
-		return containsCycle(visited, -1, 0);
+		return containsCycle_forUndirectedGraphs(visited, -1, 0);
 	}
 
-	private boolean containsCycle(boolean[] visited, int parent, int vertex)
+	private boolean containsCycle_forUndirectedGraphs(boolean[] visited, int parent, int vertex)
 	{
 		if (visited[vertex]) return true;
 
@@ -91,9 +91,33 @@ public class Graph
 
 		for (Edge e: this.adjList.get(vertex))
 			if (e.vertex != parent)
-				if (containsCycle(visited, vertex, e.vertex))
+				if (containsCycle_forUndirectedGraphs(visited, vertex, e.vertex))
 					return true;
 
+		return false;
+	}
+
+	public static boolean containsCycle_forDirectedGraphs()
+	{
+		boolean[] visited = new boolean[this.adjList.size()];
+		Stack<Integer> stack = new Stack<>();
+
+		stack.push(0);
+
+		while (!stack.isEmpty())
+		{
+			Integer vertex = stack.pop();
+
+			if (visited[vertex]) return true;
+
+			visited[vertex] = true;
+
+			for (Edge e: this.adjList.get(vertex))
+				stack.push(e.vertex);
+			
+			visited[vertex] = false;
+		}
+		
 		return false;
 	}
 
