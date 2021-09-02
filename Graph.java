@@ -80,22 +80,19 @@ public class Graph
 	public boolean containsCycle()
 	{
 		boolean[] visited = new boolean[this.adjList.size()];
-		Queue<Integer> q = new LinkedList<Integer>();
+		return containsCycle(visited, -1, 0);
+	}
 
-		q.add(0);
+	private boolean containsCycle(boolean[] visited, int parent, int vertex)
+	{
+		if (visited[vertex]) return true;
 
-		while (!q.isEmpty())
-		{
-			Integer vertex = q.poll();
-			
-			if (visited[vertex])
-				return true;
-			else
-				visited[vertex] = true;
+		visited[vertex] = true;
 
-			for (Edge e: this.adjList.get(vertex))
-				q.add(e.vertex);
-		}
+		for (Edge e: this.adjList.get(vertex))
+			if (e.vertex != parent)
+				if (containsCycle(visited, vertex, e.vertex))
+					return true;
 
 		return false;
 	}
